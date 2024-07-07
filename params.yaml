@@ -1,0 +1,4 @@
+mnist:
+  epochs: 3
+  lr: 0.01
+  momentum: 0.09
