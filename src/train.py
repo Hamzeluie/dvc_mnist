@@ -21,7 +21,7 @@ import yaml
 
 
 device = "cuda"
-
+# dvc exp run -S "mnist.lr=0.1" -S "mnist.momentum=2"
 
 class Net(nn.Module):
     def __init__(self):
@@ -73,7 +73,7 @@ class DvcMnistTrain(TrainBaseModule):
     
     def __train_one_epoch(self, epoch):
         running_loss = 0.0
-        with tqdm(total=self.train_loader.__len__() * self.BATCH_SIZE, desc=f'Epoch {epoch}/{self.epochs}', unit='img') as pbar:
+        with tqdm(total=self.train_loader.__len__() * self.BATCH_SIZE, desc=f'Epoch {epoch+1}/{self.epochs}', unit='img') as pbar:
             for i, data in enumerate(self.train_loader):
                 #Training Loop
                 inputs, labels = data
