@@ -1,0 +1,10 @@
+stages:
+  mnist:
+    cmd: python src/train.py
+    params:
+    - mnist
+metrics:
+- results/metrics.json
+plots:
+- results/plots/metrics:
+    x: step

@@ -1,0 +1,6 @@
+[cache]
+    dir = mycache
+[core]
+    remote = local
+['remote "local"']
+    url = /media/fteam4/External/mehdi/background/mehdi/dvc_mnist

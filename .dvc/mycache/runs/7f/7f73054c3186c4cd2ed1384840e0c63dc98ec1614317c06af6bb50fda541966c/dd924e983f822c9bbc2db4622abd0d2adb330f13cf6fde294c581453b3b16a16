@@ -1,0 +1,18 @@
+cmd: /home/fteam4/anaconda3/envs/fingerprint/bin/python /media/fteam4/External/mehdi/background/mehdi/mnist/src/train.py
+deps:
+- path: src/train.py
+  hash: md5
+  md5: 77e394ee25f4e793fad7f340599e6cf6
+  size: 4667
+params:
+  params.yaml:
+    mnist:
+      epochs: 3
+      lr: 0.001
+      momentum: 0.09
+outs:
+- path: results
+  hash: md5
+  md5: 47befebda4364901920d4b6bf8e5420a.dir
+  size: 182
+  nfiles: 3

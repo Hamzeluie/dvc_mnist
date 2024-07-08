@@ -1,0 +1,14 @@
+stages:
+  train:
+    cmd: python mnist/src/train.py
+    deps:
+    - src/train.py
+    params:
+    - mnist.epochs
+    - mnist.lr
+    - mnist.momentum
+metrics:
+- results/metrics.json
+plots:
+- results/plots/metrics:
+    x: step
