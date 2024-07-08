@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: d0c2a5f7cf211c554fa598e3dc343dc8
+      size: 4479
+    params:
+      params.yaml:
+        mnist.epochs: 1
+        mnist.lr: 0.1
+        mnist.momentum: 2
