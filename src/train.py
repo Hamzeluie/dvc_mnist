@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).parents[1].as_posix()
 sys.path.append(ROOT_DIR)
 
+from torchvision import transforms
 from torchvision.datasets.mnist import MNIST
 from torch.utils.data import DataLoader
 import torch
@@ -14,7 +15,7 @@ import torch.utils.data as data_utils
 import pandas as pd
 import numpy as np
 from src.modules import TrainBaseModule
-
+from tqdm import tqdm
 from dvclive import Live
 import yaml
 
@@ -53,10 +54,12 @@ class DvcMnistTrain(TrainBaseModule):
         self.net = Net().to(device)
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.SGD(self.net.parameters(), lr = self.lr, momentum = self.momentum)
-        ds = MNIST(os.path.join(ROOT_DIR, "data"), download=True)
+        self.BATCH_SIZE = 4
+        transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
+        ds = MNIST(os.path.join(ROOT_DIR, "data"), download=True, transform=transform)
         train_set, val_set = torch.utils.data.random_split(ds, [50000, 10000])
-        self.train_loader = DataLoader(train_set, batch_size=4, shuffle=True)
-        self.test_loader = DataLoader(val_set, batch_size=4, shuffle=True)
+        self.train_loader = DataLoader(train_set, batch_size=self.BATCH_SIZE, shuffle=True)
+        self.test_loader = DataLoader(val_set, batch_size=self.BATCH_SIZE, shuffle=True)
     
     def train(self):
         with Live(os.path.join(ROOT_DIR, "results")) as live:
@@ -70,14 +73,17 @@ class DvcMnistTrain(TrainBaseModule):
     
     def __train_one_epoch(self, epoch):
         running_loss = 0.0
-        for i, data in enumerate(self.train_loader, 0):
-            #Training Loop
-            inputs, labels = data
-            inputs = inputs.to(device)
-            labels = labels.to(device)
-            loss = self.__train_one_step(inputs, labels)
-            running_loss += loss
-        return running_loss
+        with tqdm(total=self.train_loader.__len__() * self.BATCH_SIZE, desc=f'Epoch {epoch}/{self.epochs}', unit='img') as pbar:
+            for i, data in enumerate(self.train_loader):
+                #Training Loop
+                inputs, labels = data
+                inputs = inputs.to(device)
+                labels = labels.to(device)
+                loss = self.__train_one_step(inputs, labels)
+                running_loss += loss
+                pbar.update(self.BATCH_SIZE)
+                pbar.set_postfix(**{'loss': round(loss, 5)})
+            return running_loss
     
     def __train_one_step(self, x, y):
         self.optimizer.zero_grad()
