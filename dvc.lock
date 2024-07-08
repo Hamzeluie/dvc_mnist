@@ -1,0 +1,91 @@
+schema: '2.0'
+stages:
+  mnist-1:
+    cmd: /home/fteam4/anaconda3/envs/fingerprint/bin/python /media/fteam4/External/mehdi/background/mehdi/mnist/src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: 77e394ee25f4e793fad7f340599e6cf6
+      size: 4667
+    params:
+      params.yaml:
+        mnist:
+          epochs: 1
+          lr: 0.1
+          momentum: 0.09
+  mnist-2:
+    cmd: /home/fteam4/anaconda3/envs/fingerprint/bin/python /media/fteam4/External/mehdi/background/mehdi/mnist/src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: 77e394ee25f4e793fad7f340599e6cf6
+      size: 4667
+    params:
+      params.yaml:
+        mnist:
+          epochs: 1
+          lr: 0.1
+          momentum: 0.09
+  mnist-3:
+    cmd: /home/fteam4/anaconda3/envs/fingerprint/bin/python /media/fteam4/External/mehdi/background/mehdi/mnist/src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: 77e394ee25f4e793fad7f340599e6cf6
+      size: 4667
+    params:
+      params.yaml:
+        mnist-3:
+          epochs: 1
+          lr: 0.01
+          momentum: 0.9
+  mnist-4:
+    cmd: /home/fteam4/anaconda3/envs/fingerprint/bin/python /media/fteam4/External/mehdi/background/mehdi/mnist/src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: 77e394ee25f4e793fad7f340599e6cf6
+      size: 4667
+    params:
+      params.yaml:
+        mnist.epochs: 1
+        mnist.lr: 0.001
+        mnist.momentum: 0.09
+  mnist:
+    cmd: python src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: 77e394ee25f4e793fad7f340599e6cf6
+      size: 4667
+    params:
+      params.yaml:
+        mnist:
+          epochs: 1
+          lr: 0.1
+          momentum: 0.09
+  minim-wart:
+    cmd: python src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: 77e394ee25f4e793fad7f340599e6cf6
+      size: 4667
+    params:
+      params.yaml:
+        mnist:
+          epochs: 1
+          lr: 0.1
+          momentum: 0.09
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: src/train.py
+      hash: md5
+      md5: ba60127e6a83fdaff85581114e350bca
+      size: 4426
+    params:
+      params.yaml:
+        mnist.epochs: 1
+        mnist.lr: 0.2
+        mnist.momentum: 0.09
