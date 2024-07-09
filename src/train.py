@@ -21,7 +21,7 @@ import yaml
 
 
 device = "cuda"
-# dvc exp run -S "mnist.lr=0.1" -S "mnist.momentum=2"
+# dvc exp run --queue -S "mnist.lr=0.1" -S "mnist.momentum=0.2,0.5"
 
 class Net(nn.Module):
     def __init__(self):
