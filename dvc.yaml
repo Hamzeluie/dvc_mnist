@@ -1,6 +1,6 @@
 stages:
   train:
-    cmd: python mnist/src/train.py
+    cmd: python src/train.py
     deps:
     - src/train.py
     params:
